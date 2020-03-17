@@ -1,8 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace PageObjectPatternDemo.Pages
 {
-    public class LoginPage
+    partial class LoginPage
     {
         private IWebDriver driver;
 
@@ -14,6 +18,7 @@ namespace PageObjectPatternDemo.Pages
         private IWebElement TxtEmail => driver.FindElement(By.CssSelector("#email"));
         private IWebElement TxtPassword => driver.FindElement(By.CssSelector("#password"));
         private IWebElement BtnLogin => driver.FindElement(By.CssSelector("#sign-in"));
+        private IWebElement ElmError => driver.FindElement(By.CssSelector(".errors-container>h4"));
 
 
         public LoginPage TypeEmail(string email)
@@ -53,6 +58,14 @@ namespace PageObjectPatternDemo.Pages
             BtnLogin.Click();
 
             return new HomePage(driver);
+        }
+
+        public LoginPage AssertLoginErrorIsDisplayed(string expError)
+        {
+            Assert.IsTrue(ElmError.Displayed, "Check whether error is shown.");
+            Assert.AreEqual(expError, ElmError.Text, "Check error text.");
+
+            return this;
         }
     }
 }

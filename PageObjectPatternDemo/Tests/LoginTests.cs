@@ -15,14 +15,13 @@ namespace PageObjectPatternDemo.Tests
             homePage.AssertLogoutButtonIsDisplayed();
         }
 
+
         [Test]
-        public void SuccessfulLoginTestWithChaining()
+        public void SuccessfulLoginTestUsingLoginMethod()
         {
-            new LoginPage(driver)
-                .TypeEmail("test@test.com")
-                .TypePassword("Test1!")
-                .Submit()
-                    .AssertLogoutButtonIsDisplayed();
+            var loginPage = new LoginPage(driver);
+            var homePage = loginPage.Login("test@test.com", "Test1!");
+            homePage.AssertLogoutButtonIsDisplayed();
         }
     }
 }
