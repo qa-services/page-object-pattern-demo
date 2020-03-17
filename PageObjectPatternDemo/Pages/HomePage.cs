@@ -14,10 +14,6 @@ namespace PageObjectPatternDemo.Pages
 
         private IWebElement BtnLogout => driver.FindElement(By.CssSelector("#logout"));
 
-        public bool IsLogoutButtonShown()
-        {
-            return BtnLogout.Displayed;
-        }
 
         public HomePage AssertLogoutButtonIsDisplayed()
         {

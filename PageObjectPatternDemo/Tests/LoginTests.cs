@@ -22,7 +22,7 @@ namespace PageObjectPatternDemo.Tests
                 .TypeEmail("test@test.com")
                 .TypePassword("Test1!")
                 .Submit()
-                .AssertLogoutButtonIsDisplayed();
+                    .AssertLogoutButtonIsDisplayed();
         }
     }
 }
